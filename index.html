@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jovie Marie Subaldo — Portfolio</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Georgia', serif; background: #faf8f5; color: #2d2a26; }
+  :root { --cream: #f5f0e8; --dark: #2d2a26; --muted: #7a7570; --accent: #c9a96e; --light-accent: #f0e8d8; }
+
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(250,248,245,0.96); backdrop-filter: blur(8px);
+    border-bottom: 0.5px solid #e0d8cc;
+    padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 60px;
+  }
+  .nav-name { font-size: 15px; font-weight: 500; letter-spacing: 0.05em; }
+  .nav-links { display: flex; gap: 1.5rem; list-style: none; }
+  .nav-links a { font-family: 'Helvetica Neue', sans-serif; font-size: 12px; color: var(--muted); text-decoration: none; letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--dark); }
+
+  /* HERO */
+  .hero {
+    min-height: 92vh; display: flex; align-items: center; justify-content: center;
+    text-align: center; padding: 6rem 2rem 4rem; position: relative; overflow: hidden;
+    background: #faf8f5;
+  }
+  .blob { position: absolute; border-radius: 60% 40% 70% 30% / 50% 60% 40% 50%; opacity: 0.15; pointer-events: none; }
+  .blob1 { width: 340px; height: 300px; background: var(--accent); top: 3%; left: -90px; }
+  .blob2 { width: 280px; height: 240px; background: #b8a090; bottom: 5%; right: -70px; }
+  .hero-inner { position: relative; z-index: 2; max-width: 620px; }
+  .hero-photo {
+    width: 170px; height: 170px; border-radius: 50%; object-fit: cover; object-position: top;
+    border: 5px solid #fff; box-shadow: 0 8px 40px rgba(0,0,0,0.13); margin-bottom: 1.5rem;
+    display: block; margin-left: auto; margin-right: auto;
+  }
+  .hero-initials {
+    width: 170px; height: 170px; border-radius: 50%;
+    background: linear-gradient(135deg, #e0d4c0, #c9b89a);
+    margin: 0 auto 1.5rem; display: flex; align-items: center; justify-content: center;
+    border: 5px solid #fff; box-shadow: 0 8px 40px rgba(0,0,0,0.13);
+  }
+  .hero-name { font-size: clamp(2.2rem, 6vw, 3.8rem); font-weight: 400; letter-spacing: -0.01em; margin-bottom: 0.5rem; }
+  .hero-title { font-family: 'Helvetica Neue', sans-serif; font-size: 13px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 1.5rem; }
+  .hero-summary { font-size: 1rem; line-height: 1.85; color: #6a6560; max-width: 520px; margin: 0 auto 2rem; font-style: italic; }
+  .hero-cta { display: inline-block; font-family: 'Helvetica Neue', sans-serif; font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; border: 1px solid var(--dark); padding: 0.75rem 2rem; color: var(--dark); text-decoration: none; transition: all 0.25s; cursor: pointer; background: transparent; }
+  .hero-cta:hover { background: var(--dark); color: #faf8f5; }
+
+  /* SECTIONS */
+  section { padding: 5rem 2rem; max-width: 1000px; margin: 0 auto; }
+  .section-label { font-family: 'Helvetica Neue', sans-serif; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.5rem; }
+  .section-title { font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 400; color: var(--dark); margin-bottom: 1rem; }
+  .divider { width: 40px; height: 1px; background: var(--accent); margin: 0 0 2.5rem; }
+
+  /* ABOUT */
+  .about-grid { display: grid; grid-template-columns: 1fr 1.6fr; gap: 4rem; align-items: start; }
+  .about-photo {
+    width: 100%; aspect-ratio: 3/4; object-fit: cover; object-position: top;
+    border-radius: 10px; display: block;
+  }
+  .about-photo-placeholder {
+    width: 100%; aspect-ratio: 3/4;
+    background: linear-gradient(160deg, #ede3d6, #c9b89a);
+    border-radius: 10px; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; gap: 8px;
+  }
+  .about-text p { font-size: 1rem; line-height: 1.85; color: #6a6560; margin-bottom: 1rem; }
+  .edu-block { margin-top: 2rem; padding: 1.25rem; background: var(--light-accent); border-radius: 8px; border-left: 3px solid var(--accent); }
+  .edu-school { font-size: 15px; font-weight: 500; }
+  .edu-degree { font-family: 'Helvetica Neue', sans-serif; font-size: 12px; color: var(--muted); margin-top: 3px; }
+  .edu-years { font-family: 'Helvetica Neue', sans-serif; font-size: 11px; color: var(--accent); margin-top: 4px; }
+  .cert-block { margin-top: 1rem; padding: 1rem 1.25rem; background: #fff; border-radius: 8px; border: 0.5px solid #ddd5c8; }
+  .cert-title { font-family: 'Helvetica Neue', sans-serif; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+  .cert-item { font-size: 13px; line-height: 1.6; color: var(--dark); padding: 4px 0; border-bottom: 0.5px solid #f0e8d8; }
+  .cert-item:last-child { border-bottom: none; }
+
+  /* SKILLS */
+  .bg-cream { background: var(--cream); }
+  .bg-cream .inner { max-width: 1000px; margin: 0 auto; padding: 5rem 2rem; }
+  .skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+  .skills-col h3 { font-family: 'Helvetica Neue', sans-serif; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.25rem; }
+  .skill-tag { display: inline-block; font-family: 'Helvetica Neue', sans-serif; font-size: 12px; padding: 5px 13px; border: 0.5px solid #c8bfb0; border-radius: 20px; margin: 0 5px 7px 0; color: var(--dark); background: #fff; }
+  .tools-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 2rem; }
+  .tool-badge { font-family: 'Helvetica Neue', sans-serif; font-size: 12px; letter-spacing: 0.03em; padding: 7px 15px; background: var(--dark); color: #faf8f5; border-radius: 4px; }
+
+  /* PHOTOS STRIP */
+  .photos-strip { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 0 0 1rem; }
+  .photo-frame { border-radius: 10px; overflow: hidden; aspect-ratio: 1; background: #e8dece; display: flex; align-items: center; justify-content: center; }
+  .photo-frame img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
+  .photo-hint { font-family: 'Helvetica Neue', sans-serif; font-size: 11px; color: var(--muted); text-align: center; letter-spacing: 0.08em; margin-bottom: 3rem; }
+
+  /* EXPERIENCE */
+  .exp-timeline { position: relative; padding-left: 2rem; }
+  .exp-timeline::before { content: ''; position: absolute; left: 6px; top: 8px; bottom: 8px; width: 1px; background: #ddd5c8; }
+  .exp-item { position: relative; margin-bottom: 3rem; }
+  .exp-item::before { content: ''; position: absolute; left: -1.75rem; top: 7px; width: 10px; height: 10px; border-radius: 50%; background: var(--accent); border: 2px solid #faf8f5; box-shadow: 0 0 0 1px var(--accent); }
+  .exp-company { font-family: 'Helvetica Neue', sans-serif; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 3px; }
+  .exp-role { font-size: 1.2rem; font-weight: 400; color: var(--dark); margin-bottom: 3px; }
+  .exp-period { font-family: 'Helvetica Neue', sans-serif; font-size: 12px; color: var(--muted); margin-bottom: 10px; }
+  .exp-bullets { list-style: none; padding: 0; }
+  .exp-bullets li { font-size: 13.5px; line-height: 1.75; color: #6a6560; padding: 3px 0 3px 16px; position: relative; }
+  .exp-bullets li::before { content: '–'; position: absolute; left: 0; color: var(--accent); }
+
+  /* TESTIMONIALS */
+  .testimonials-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+  .testimonial-card { background: #fff; border-radius: 10px; padding: 1.75rem; border: 0.5px solid #ddd5c8; }
+  .quote-mark { font-size: 3rem; line-height: 1; color: var(--accent); opacity: 0.35; font-family: Georgia, serif; margin-bottom: 0.5rem; }
+  .testimonial-text { font-size: 14px; line-height: 1.8; color: #6a6560; font-style: italic; margin-bottom: 1.25rem; }
+  .testimonial-name { font-size: 14px; font-weight: 500; color: var(--dark); }
+  .testimonial-role { font-family: 'Helvetica Neue', sans-serif; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-top: 2px; }
+
+  /* CONTACT */
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+  .contact-item { display: flex; align-items: center; gap: 12px; margin-bottom: 1rem; }
+  .contact-icon { width: 36px; height: 36px; border-radius: 50%; background: var(--light-accent); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .contact-icon svg { width: 15px; height: 15px; stroke: var(--accent); fill: none; stroke-width: 1.5; }
+  .contact-detail { font-family: 'Helvetica Neue', sans-serif; font-size: 13px; color: var(--dark); }
+  .contact-label { font-family: 'Helvetica Neue', sans-serif; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+  .contact-form { display: flex; flex-direction: column; gap: 0.85rem; }
+  .contact-form input, .contact-form textarea {
+    width: 100%; padding: 0.7rem 1rem; background: #fff;
+    border: 0.5px solid #c8bfb0; border-radius: 6px;
+    font-family: 'Helvetica Neue', sans-serif; font-size: 13px; color: var(--dark);
+    outline: none; transition: border-color 0.2s; resize: vertical;
+  }
+  .contact-form input:focus, .contact-form textarea:focus { border-color: var(--accent); }
+  .contact-form textarea { min-height: 110px; }
+  .submit-btn {
+    align-self: flex-start; font-family: 'Helvetica Neue', sans-serif;
+    font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase;
+    border: 1px solid var(--dark); padding: 0.75rem 2rem;
+    color: var(--dark); background: transparent; cursor: pointer; transition: all 0.25s;
+  }
+  .submit-btn:hover { background: var(--dark); color: #faf8f5; }
+
+  footer { text-align: center; padding: 2rem; border-top: 0.5px solid #e0d8cc; font-family: 'Helvetica Neue', sans-serif; font-size: 12px; color: var(--muted); letter-spacing: 0.08em; }
+
+  @media (max-width: 680px) {
+    .about-grid, .skills-grid, .testimonials-grid, .contact-grid { grid-template-columns: 1fr; }
+    .photos-strip { grid-template-columns: repeat(2, 1fr); }
+    nav { padding: 0 1rem; }
+    .nav-links { gap: 0.75rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-name">Jovie Marie Subaldo</span>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="blob blob1"></div>
+  <div class="blob blob2"></div>
+  <div class="hero-inner">
+    <!--
+      TO ADD YOUR PHOTO:
+      1. Save your photo as "jovie-hero.jpg" in the same folder as this HTML file
+      2. The image below will automatically show it
+    -->
+    <div id="hero-initials" class="hero-initials">
+      <span style="font-size:2.8rem;color:#8a7a68;font-family:Georgia,serif;">JM</span>
+    </div>
+    <img
+      src="jovie-hero.jpg"
+      class="hero-photo"
+      alt="Jovie Marie Subaldo"
+      style="display:none;"
+      onload="this.style.display='block';document.getElementById('hero-initials').style.display='none';"
+    />
+    <h1 class="hero-name">Jovie Marie Subaldo</h1>
+    <p class="hero-title">Virtual Assistant &amp; Administrative Professional</p>
+    <p class="hero-summary">Results-driven professional with over a decade of experience in administrative support, hospitality management, and customer service — thriving in fast-paced, multicultural environments.</p>
+    <a href="#contact" class="hero-cta">Get in touch</a>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <p class="section-label">Who I am</p>
+  <h2 class="section-title">About Me</h2>
+  <div class="divider"></div>
+  <div class="about-grid">
+    <div>
+      <!--
+        TO ADD YOUR ABOUT PHOTO:
+        Save your photo as "jovie-about.jpg" in the same folder as this file.
+      -->
+      <div id="about-placeholder" class="about-photo-placeholder">
+        <div style="width:90px;height:90px;border-radius:50%;background:#b8a488;display:flex;align-items:center;justify-content:center;">
+          <span style="font-size:2rem;color:#fff;font-family:Georgia,serif;">JM</span>
+        </div>
+        <p style="font-family:'Helvetica Neue',sans-serif;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#8a7a68;margin-top:8px;">Jovie Marie Subaldo</p>
+        <p style="font-family:'Helvetica Neue',sans-serif;font-size:10px;color:#a09080;letter-spacing:0.06em;">Administrative Professional</p>
+      </div>
+      <img
+        src="jovie-about.jpg"
+        class="about-photo"
+        alt="Jovie Marie Subaldo"
+        style="display:none;"
+        onload="this.style.display='block';document.getElementById('about-placeholder').style.display='none';"
+      />
+    </div>
+    <div class="about-text">
+      <p>I'm a dedicated and results-driven professional with over a decade of experience in administrative support, hospitality management, and customer service. I have a demonstrated ability to manage diverse teams, streamline operations, and uphold high standards of quality and safety.</p>
+      <p>Highly organized, detail-oriented, and proficient in project coordination, MS Office applications, and workplace compliance standards. Recognized for exceptional communication skills and a strong work ethic in fast-paced, multicultural environments.</p>
+      <div class="edu-block">
+        <div class="edu-school">Central Philippine University</div>
+        <div class="edu-degree">Bachelor of Science in Hotel and Restaurant Management (BSHRM)</div>
+        <div class="edu-years">2005 – 2009</div>
+      </div>
+      <div class="cert-block">
+        <div class="cert-title">Training &amp; Certifications</div>
+        <div class="cert-item">OSHA 30-Hour Construction Safety &amp; Health Certification</div>
+        <div class="cert-item">EM 385-1-1 40-Hour Safety Training (U.S. Army Corps of Engineers Standards)</div>
+      </div>
+      <div style="margin-top:1rem;display:flex;gap:10px;flex-wrap:wrap;">
+        <span class="skill-tag">🇬🇧 English</span>
+        <span class="skill-tag">🇵🇭 Filipino</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PHOTOS STRIP -->
+<div style="max-width:1000px;margin:0 auto;padding:0 2rem 4rem;">
+  <!--
+    TO ADD YOUR PORTFOLIO PHOTOS:
+    Save your images as "jovie-photo1.jpg", "jovie-photo2.jpg", "jovie-photo3.jpg"
+    in the same folder as this HTML file.
+  -->
+  <div class="photos-strip">
+    <div class="photo-frame">
+      <img src="jovie-photo1.jpg" alt="Portfolio photo 1" onerror="this.parentElement.innerHTML='<span style=\'font-size:2.5rem;\'>📋</span>';" />
+    </div>
+    <div class="photo-frame">
+      <img src="jovie-photo2.jpg" alt="Portfolio photo 2" onerror="this.parentElement.innerHTML='<span style=\'font-size:2.5rem;\'>💼</span>';" />
+    </div>
+    <div class="photo-frame">
+      <img src="jovie-photo3.jpg" alt="Portfolio photo 3" onerror="this.parentElement.innerHTML='<span style=\'font-size:2.5rem;\'>📊</span>';" />
+    </div>
+  </div>
+  <p class="photo-hint">Save your photos as jovie-photo1.jpg, jovie-photo2.jpg, jovie-photo3.jpg in the same folder to display them here.</p>
+</div>
+
+<!-- SKILLS -->
+<div class="bg-cream" id="skills">
+  <div class="inner">
+    <p class="section-label">What I bring</p>
+    <h2 class="section-title">Skills &amp; Competencies</h2>
+    <div class="divider"></div>
+    <div class="skills-grid">
+      <div class="skills-col">
+        <h3>Hard Skills</h3>
+        <span class="skill-tag">Administrative Support</span>
+        <span class="skill-tag">Email Management</span>
+        <span class="skill-tag">Calendar Management</span>
+        <span class="skill-tag">Data Entry &amp; Management</span>
+        <span class="skill-tag">Product Photography</span>
+        <span class="skill-tag">Portrait Photography</span>
+        <span class="skill-tag">Social Media Content</span>
+        <span class="skill-tag">Event Coordination</span>
+        <span class="skill-tag">Market Research</span>
+        <span class="skill-tag">Logistics Documentation</span>
+        <span class="skill-tag">Project Coordination</span>
+        <span class="skill-tag">Inventory Management</span>
+      </div>
+      <div class="skills-col">
+        <h3>Soft Skills</h3>
+        <span class="skill-tag">Planning &amp; Organizing</span>
+        <span class="skill-tag">Multitasking</span>
+        <span class="skill-tag">Time Management</span>
+        <span class="skill-tag">Customer Service</span>
+        <span class="skill-tag">Team Leadership</span>
+        <span class="skill-tag">Attention to Detail</span>
+        <span class="skill-tag">Stakeholder Communication</span>
+        <span class="skill-tag">Cross-cultural Collaboration</span>
+      </div>
+    </div>
+    <div style="margin-top:3rem;">
+      <h3 style="font-family:'Helvetica Neue',sans-serif;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);margin-bottom:1.25rem;">Tools &amp; Platforms</h3>
+      <div class="tools-row">
+        <span class="tool-badge">Google Workspace</span>
+        <span class="tool-badge">Microsoft Office</span>
+        <span class="tool-badge">Canva</span>
+        <span class="tool-badge">Notion</span>
+        <span class="tool-badge">ClickUp</span>
+        <span class="tool-badge">Slack</span>
+        <span class="tool-badge">Trello</span>
+        <span class="tool-badge">Asana</span>
+        <span class="tool-badge">Zoom</span>
+        <span class="tool-badge">Meta Business Suite</span>
+        <span class="tool-badge">ChatGPT / AI Tools</span>
+        <span class="tool-badge">LinkedIn</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <p class="section-label">My journey</p>
+  <h2 class="section-title">Work Experience</h2>
+  <div class="divider"></div>
+  <div class="exp-timeline">
+
+    <div class="exp-item">
+      <div class="exp-company">Oni Ventures Digital Marketing Agency — Dubai, UAE (Remote)</div>
+      <div class="exp-role">Market &amp; Trend Research Assistant</div>
+      <div class="exp-period">March 2025 – Present</div>
+      <ul class="exp-bullets">
+        <li>Researched and identified current trends across social media platforms and online markets</li>
+        <li>Analyzed trending topics, content, and audience behavior to provide actionable insights</li>
+        <li>Collected and organized data to support decision-making and content strategies</li>
+        <li>Monitored competitor activity and industry trends</li>
+        <li>Prepared reports and summaries of findings for the marketing team</li>
+        <li>Used online tools and platforms to track trends and engagement metrics</li>
+      </ul>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-company">General Asia Pacific Construction (GAPCON) — Diego Garcia, British Indian Ocean Territory</div>
+      <div class="exp-role">Administrative Assistant</div>
+      <div class="exp-period">May 2021 – December 2023</div>
+      <ul class="exp-bullets">
+        <li>Managed project documentation: logging, distributing, and tracking submittals and RFIs</li>
+        <li>Maintained electronic and manual archiving of project files</li>
+        <li>Drafted memos, letters, bid packages, reports, agendas, contracts, and purchase orders</li>
+        <li>Coordinated certificate requirements and maintained records</li>
+        <li>Demonstrated strong attention to detail and urgency in daily tasks</li>
+        <li>Communicated with stakeholders across diverse backgrounds</li>
+        <li>Coordinated international freight logistics, including ocean shipments from Singapore and air freight from Japan to Diego Garcia for project materials</li>
+        <li>Liaised with suppliers, freight forwarders, and logistics teams to ensure timely and accurate delivery of shipments</li>
+        <li>Monitored and tracked shipments, ensuring alignment with project timelines and requirements</li>
+        <li>Prepared and maintained shipping and logistics documentation, ensuring accuracy and completeness</li>
+      </ul>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-company">Nando's Restaurant — Seef Mall &amp; Amwaj Lagoon, Bahrain</div>
+      <div class="exp-role">Restaurant Manager</div>
+      <div class="exp-period">December 2019 – May 2021</div>
+      <ul class="exp-bullets">
+        <li>Supervised restaurant staff and ensured high-quality customer service</li>
+        <li>Managed staff schedules and processed payroll</li>
+        <li>Oversaw kitchen and dining operations; ensured compliance with hygiene and safety standards</li>
+        <li>Monitored financial performance including daily, weekly, and monthly revenue and cost tracking</li>
+        <li>Collected guest feedback to improve menu offerings and service</li>
+      </ul>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-company">Icons Coffee Couture — Mall of Qatar</div>
+      <div class="exp-role">Store Manager</div>
+      <div class="exp-period">September 2016 – December 2018</div>
+      <ul class="exp-bullets">
+        <li>Directed daily café operations and supervised staff</li>
+        <li>Recruited and trained baristas and waitstaff on product knowledge and equipment use</li>
+        <li>Handled vendor coordination and inventory management</li>
+        <li>Monitored sales reports and introduced seasonal menu items</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<div class="bg-cream">
+  <div class="inner">
+    <p class="section-label">What others say</p>
+    <h2 class="section-title">Testimonials</h2>
+    <div class="divider"></div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <div class="quote-mark">"</div>
+        <p class="testimonial-text">Jovie demonstrated strong administrative skills by managing emails, schedules, and project data efficiently. She communicated well with the team and maintained organized records, which helped us stay on track with our projects.</p>
+        <div class="testimonial-name">Shawn Holt</div>
+        <div class="testimonial-role">Construction Manager — GAPCON</div>
+      </div>
+      <div class="testimonial-card">
+        <div class="quote-mark">"</div>
+        <p class="testimonial-text">Jovie was a valuable support to our team as a Market and Trend Research Assistant. She consistently delivered well-organized data and insightful research that helped guide our marketing strategies. Her attention to detail and reliability made her a great asset, even in a remote setup.</p>
+        <div class="testimonial-name">Kathlien Dizon</div>
+        <div class="testimonial-role">Research &amp; Communications Manager — Oni Ventures</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<section id="contact">
+  <p class="section-label">Let's connect</p>
+  <h2 class="section-title">Contact</h2>
+  <div class="divider"></div>
+  <div class="contact-grid">
+    <div>
+      <p style="font-size:1rem;line-height:1.85;color:#6a6560;margin-bottom:1.75rem;">Available for remote work opportunities in virtual assistance, administrative support, market research, and social media management.</p>
+      <div class="contact-item">
+        <div class="contact-icon">
+          <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.55 6.18a19.79 19.79 0 01-3.07-8.67A2 2 0 012.48 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.91 9.91a16 16 0 006.18 6.18l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+        </div>
+        <div><div class="contact-label">Phone</div><div class="contact-detail">+63 956 711 4247</div></div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">
+          <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </div>
+        <div><div class="contact-label">Email</div><div class="contact-detail"><a href="mailto:jabimarie@gmail.com" style="color:inherit;text-decoration:none;">jabimarie@gmail.com</a></div></div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">
+          <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <div><div class="contact-label">Location</div><div class="contact-detail">Oton, Iloilo, Philippines</div></div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">
+          <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        </div>
+        <div><div class="contact-label">LinkedIn</div><div class="contact-detail">linkedin.com/in/joviemarie</div></div>
+      </div>
+    </div>
+    <div class="contact-form">
+      <input type="text" placeholder="Your name" />
+      <input type="email" placeholder="Your email" />
+      <input type="text" placeholder="Subject" />
+      <textarea placeholder="Your message..."></textarea>
+      <button class="submit-btn">Send message</button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  &cop
